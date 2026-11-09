@@ -42,7 +42,7 @@ dev = [
     "ruff==0.12.7",
     "mypy==1.17.1",
     "types-PyYAML==6.0.12.20250516",
-    "pip-audit==2.9.0",
+    "pip-audit==2.10.1",
 ]
 
 [tool.hatch.version]
