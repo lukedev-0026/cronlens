@@ -261,7 +261,8 @@ def _github_findings(job: ScheduledJob, expr: CronExpression) -> list[Finding]:
                 job,
             )
         )
-    if 0 in expr.minutes and len(expr.minutes) < 60:
+    # Frequent schedules are not hurt by one delayed slot an hour.
+    if 0 in expr.minutes and len(expr.minutes) <= 4:
         findings.append(
             _finding(
                 "CL010",

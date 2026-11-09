@@ -127,8 +127,10 @@ def test_dst_only_when_job_runs_on_change_day() -> None:
 
 def test_github_short_interval_and_top_of_hour() -> None:
     findings = run(job("*/2 * * * *", source=SourceKind.GITHUB_ACTIONS, tz="UTC"))
-    assert ids(findings) == ["CL009", "CL010"]
+    assert ids(findings) == ["CL009"]
     assert "2 minute(s) apart" in findings[0].message
+    assert ids(run(job("0 6 * * *", source=SourceKind.GITHUB_ACTIONS))) == ["CL010"]
+    assert ids(run(job("*/15 * * * *", source=SourceKind.GITHUB_ACTIONS))) == ["CL010"]
 
 
 def test_github_interval_counts_day_wrap() -> None:

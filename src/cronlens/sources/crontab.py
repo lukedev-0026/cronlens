@@ -65,8 +65,13 @@ def _unquote(value: str) -> str:
     return value
 
 
+_MAX_NAME = 48
+
+
 def _job_name(command: str, path: str, line: int) -> str:
-    if command:
-        program = command.split()[0].rsplit("/", 1)[-1]
-        return f"{program} ({path}:{line})"
-    return f"{path}:{line}"
+    """Name a job after its command, without the program's directory."""
+    if not command:
+        return f"{path}:{line}"
+    program, _, args = command.partition(" ")
+    name = program.rsplit("/", 1)[-1] + (f" {args.strip()}" if args.strip() else "")
+    return name if len(name) <= _MAX_NAME else name[: _MAX_NAME - 3] + "..."
