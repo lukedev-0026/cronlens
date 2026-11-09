@@ -1,0 +1,49 @@
+# Synthetic example CronJobs for the cronlens demo.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: invoice-run
+  namespace: billing
+spec:
+  schedule: "30 2 * * *"
+  timeZone: "America/New_York"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: invoice
+              image: registry.example.com/billing/invoice:1.4.2
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: weekly-digest
+  namespace: reports
+spec:
+  schedule: "CRON_TZ=Europe/Berlin 0 7 * * MON"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: digest
+              image: registry.example.com/reports/digest:2.0.0
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cache-warm
+  namespace: ops
+spec:
+  schedule: "45 4 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: warm
+              image: registry.example.com/ops/cache-warm:0.9.1

@@ -1,0 +1,5 @@
+# Settings for the cronlens demo repository.
+default-timezone = "UTC"
+collision-threshold = 3
+collision-scope = "source"
+fail-on = "warning"

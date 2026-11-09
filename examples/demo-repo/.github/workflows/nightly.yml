@@ -1,0 +1,12 @@
+# Synthetic example workflow for the cronlens demo.
+name: Nightly build
+on:
+  schedule:
+    - cron: "0 2 * * *"
+    - cron: "*/3 * * * *"
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "build"
