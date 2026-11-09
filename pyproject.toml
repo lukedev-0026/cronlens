@@ -40,7 +40,7 @@ dev = [
     "pytest==8.4.1",
     "pytest-cov==6.2.1",
     "ruff==0.12.7",
-    "mypy==1.17.1",
+    "mypy==2.4.1",
     "types-PyYAML==6.0.12.20250516",
     "pip-audit==2.9.0",
 ]
