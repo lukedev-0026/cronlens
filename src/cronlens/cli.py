@@ -141,8 +141,17 @@ _EXCLUDE = click.option(
     help="Lowest severity that makes the exit code 1 (default: warning).",
 )
 @click.option("--disable", multiple=True, metavar="RULE", help="Turn off a rule. Repeatable.")
-@click.option("--collision-threshold", type=click.IntRange(1, 1000), metavar="N")
-@click.option("--collision-scope", type=click.Choice([s.value for s in CollisionScope]))
+@click.option(
+    "--collision-threshold",
+    type=click.IntRange(1, 1000),
+    metavar="N",
+    help="Report minutes where more than N jobs start (default: 3).",
+)
+@click.option(
+    "--collision-scope",
+    type=click.Choice([s.value for s in CollisionScope]),
+    help="Which jobs can collide: same source kind, same file, or all (default: source).",
+)
 @click.option("--now", metavar="DATETIME", help="Analyse as if it were this ISO 8601 time.")
 def scan(
     paths: tuple[Path, ...],
