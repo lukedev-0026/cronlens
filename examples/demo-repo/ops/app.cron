@@ -1,0 +1,25 @@
+# Synthetic example crontab for the cronlens demo.
+SHELL=/bin/sh
+MAILTO=""
+
+# Four heartbeats that all start at minute 5.
+5 * * * * /opt/app/bin/heartbeat --target api
+5 * * * * /opt/app/bin/heartbeat --target web
+5 * * * * /opt/app/bin/heartbeat --target worker
+5 * * * * /opt/app/bin/heartbeat --target queue
+
+# Weekday reminder: no problems.
+40 8 * * 1-5 /opt/app/bin/standup-reminder
+
+# 31 April does not exist.
+0 0 31 4 * /opt/app/bin/quarter-close
+
+# Runs on the 1st AND on every Monday, not only on a Monday the 1st.
+0 3 1 * 1 /opt/app/bin/purge-tmp
+
+# Only on leap days.
+0 6 29 2 * /opt/app/bin/leap-report
+
+CRON_TZ=Europe/London
+# 01:15 is skipped in March and happens twice in October in London.
+15 1 * * * /opt/app/bin/export-ledger
