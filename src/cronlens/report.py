@@ -17,7 +17,7 @@ from cronlens.rules import RULES
 __all__ = ["FORMATS", "ScanSummary", "render"]
 
 FORMATS = ("text", "json", "sarif")
-PROJECT_URL = "https://github.com/luke-taaffe/cronlens"
+PROJECT_URL = "https://github.com/lukedev-0026/cronlens"
 
 _COLOURS = {Severity.ERROR: "red", Severity.WARNING: "yellow", Severity.INFO: "cyan"}
 _SARIF_LEVELS = {Severity.ERROR: "error", Severity.WARNING: "warning", Severity.INFO: "note"}
