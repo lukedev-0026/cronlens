@@ -7,7 +7,7 @@ from collections.abc import Callable, Iterable
 
 from cronlens.expr import CronExpression
 
-__all__ = ["describe"]
+__all__ = ["describe", "join_values"]
 
 _DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 _ALL_MINUTES = frozenset(range(60))
@@ -25,7 +25,7 @@ def describe(expr: CronExpression) -> str:
     if day:
         pieces.append(day)
     if expr.months != _ALL_MONTHS:
-        pieces.append("in " + _join_values(expr.months, _month_name))
+        pieces.append("in " + join_values(expr.months, _month_name))
     text = " ".join(pieces)
     return text[0].upper() + text[1:]
 
@@ -38,7 +38,7 @@ def _time_phrase(expr: CronExpression) -> str:
         if len(hours) == 1:
             hour = next(iter(hours))
             return f"every minute from {hour:02d}:00 to {hour:02d}:59"
-        return "every minute during hours " + _join_values(hours, str)
+        return "every minute during hours " + join_values(hours, str)
 
     minute_step = _step_of(minutes, 0, 59)
     if hours == _ALL_HOURS:
@@ -46,7 +46,7 @@ def _time_phrase(expr: CronExpression) -> str:
             return f"every {minute_step} minutes"
         if len(minutes) == 1:
             return f"at minute {next(iter(minutes))} past every hour"
-        return f"at minutes {_join_values(minutes, str)} past every hour"
+        return f"at minutes {join_values(minutes, str)} past every hour"
 
     if len(minutes) * len(hours) <= _MAX_LISTED_TIMES:
         return "at " + _join([f"{h:02d}:{m:02d}" for h in sorted(hours) for m in sorted(minutes)])
@@ -55,16 +55,16 @@ def _time_phrase(expr: CronExpression) -> str:
     if hour_step and hour_step > 1 and len(minutes) == 1:
         return f"at minute {next(iter(minutes))} past every {hour_step} hours"
     minute_word = "minute" if len(minutes) == 1 else "minutes"
-    return f"at {minute_word} {_join_values(minutes, str)} past hours {_join_values(hours, str)}"
+    return f"at {minute_word} {join_values(minutes, str)} past hours {join_values(hours, str)}"
 
 
 def _day_phrase(expr: CronExpression) -> str:
     dom_phrase = ""
     if expr.days_of_month != _ALL_DOM:
-        dom_phrase = "on the " + _join_values(expr.days_of_month, _ordinal) + " of the month"
+        dom_phrase = "on the " + join_values(expr.days_of_month, _ordinal) + " of the month"
     dow_phrase = ""
     if expr.days_of_week != _ALL_DOW:
-        dow_phrase = "on " + _join_values(expr.days_of_week, lambda d: _DAY_NAMES[d])
+        dow_phrase = "on " + join_values(expr.days_of_week, lambda d: _DAY_NAMES[d])
 
     if dom_phrase and dow_phrase:
         joiner = " or " if expr.uses_or_semantics else " if it is also "
@@ -85,7 +85,7 @@ def _step_of(values: frozenset[int], low: int, high: int) -> int | None:
     return None
 
 
-def _join_values(values: Iterable[int], name: Callable[[int], str]) -> str:
+def join_values(values: Iterable[int], name: Callable[[int], str]) -> str:
     """Join sorted values, collapsing runs of three or more into ranges."""
     ordered = sorted(values)
     groups: list[str] = []
