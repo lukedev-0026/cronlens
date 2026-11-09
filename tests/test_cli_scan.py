@@ -152,3 +152,19 @@ def test_rules_command() -> None:
     assert code == 0
     assert out.count("\n") == 13
     assert "CL013  start-collision" in out
+
+
+def test_environment_variables(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "x.cron").write_text("30 2 * * * /bin/true\n")
+    monkeypatch.setenv("CRONLENS_DEFAULT_TZ", "America/New_York")
+    code, out = invoke("scan", "--now", NOW)
+    assert code == 1
+    assert "CL007" in out
+    monkeypatch.setenv("CRONLENS_FAIL_ON", "error")
+    assert invoke("scan", "--now", NOW)[0] == 0
+    settings = tmp_path / "custom.toml"
+    settings.write_text('disable = ["CL007"]\n')
+    monkeypatch.setenv("CRONLENS_CONFIG", str(settings))
+    monkeypatch.delenv("CRONLENS_FAIL_ON")
+    assert invoke("scan", "--now", NOW)[0] == 0
