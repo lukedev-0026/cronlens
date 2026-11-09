@@ -18,7 +18,7 @@ documentation fixes are all welcome.
 You need Python 3.11 or newer and [uv](https://docs.astral.sh/uv/).
 
 ```sh
-git clone https://github.com/luke-taaffe/cronlens
+git clone https://github.com/lukedev-0026/cronlens
 cd cronlens
 uv sync
 ```

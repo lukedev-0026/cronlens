@@ -30,5 +30,5 @@ First release.
   variables.
 - GitHub Action (`action.yml`) and pre-commit hook.
 
-[Unreleased]: https://github.com/luke-taaffe/cronlens/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/luke-taaffe/cronlens/releases/tag/v0.1.0
+[Unreleased]: https://github.com/lukedev-0026/cronlens/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/lukedev-0026/cronlens/releases/tag/v0.1.0

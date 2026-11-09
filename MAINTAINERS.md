@@ -5,7 +5,7 @@ employer, client or other organisation.
 
 | Name | GitHub | Role |
 | --- | --- | --- |
-| Luke Taaffe | [@luke-taaffe](https://github.com/luke-taaffe) | Creator, owner and lead maintainer |
+| Luke Taaffe | [@lukedev-0026](https://github.com/lukedev-0026) | Creator, owner and lead maintainer |
 
 The maintainer reviews and merges pull requests, triages issues, cuts
 releases and handles security reports (see [SECURITY.md](SECURITY.md)).

@@ -1,6 +1,6 @@
 # cronlens
 
-[![CI](https://github.com/luke-taaffe/cronlens/actions/workflows/ci.yml/badge.svg)](https://github.com/luke-taaffe/cronlens/actions/workflows/ci.yml)
+[![CI](https://github.com/lukedev-0026/cronlens/actions/workflows/ci.yml/badge.svg)](https://github.com/lukedev-0026/cronlens/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 cronlens finds mistakes in cron schedules across a whole repository: crontabs,
@@ -51,9 +51,9 @@ Development uses [uv](https://docs.astral.sh/uv/), pytest, ruff and mypy
 cronlens is not on PyPI yet. Install it from GitHub:
 
 ```sh
-pipx install git+https://github.com/luke-taaffe/cronlens
+pipx install git+https://github.com/lukedev-0026/cronlens
 # or
-uv tool install git+https://github.com/luke-taaffe/cronlens
+uv tool install git+https://github.com/lukedev-0026/cronlens
 ```
 
 ## Usage
@@ -154,7 +154,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: luke-taaffe/cronlens@v0.1.0
+      - uses: lukedev-0026/cronlens@v0.1.0
         with:
           fail-on: error
           sarif-file: cronlens.sarif
@@ -171,7 +171,7 @@ Inputs: `paths` (default `.`), `fail-on`, `sarif-file`, and `args` for extra
 
 ```yaml
 repos:
-  - repo: https://github.com/luke-taaffe/cronlens
+  - repo: https://github.com/lukedev-0026/cronlens
     rev: v0.1.0
     hooks:
       - id: cronlens
@@ -180,7 +180,7 @@ repos:
 ## Development and testing
 
 ```sh
-git clone https://github.com/luke-taaffe/cronlens
+git clone https://github.com/lukedev-0026/cronlens
 cd cronlens
 uv sync                      # creates .venv with runtime and dev dependencies
 uv run pytest                # unit and end-to-end tests
