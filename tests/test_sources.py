@@ -32,7 +32,7 @@ def test_crontab_jobs_and_timezones() -> None:
         ("0 0 31 2 *", "America/Chicago", 11),
     ]
     assert jobs[0].command == "/usr/local/bin/poll-queue --batch 50"
-    assert jobs[0].name == "poll-queue (deploy/app.cron:4)"
+    assert jobs[0].name == "poll-queue --batch 50"
     assert all(j.source is SourceKind.CRONTAB for j in jobs)
 
 
@@ -41,7 +41,7 @@ def test_system_crontab_drops_user_field() -> None:
         "17 * * * * root cd / && run-parts /etc/cron.hourly\n", "etc/crontab", system=True
     )
     assert result.jobs[0].command == "cd / && run-parts /etc/cron.hourly"
-    assert result.jobs[0].name.startswith("cd ")
+    assert result.jobs[0].name == "cd / && run-parts /etc/cron.hourly"
 
 
 def test_crontab_short_line_keeps_schedule_for_checks() -> None:
@@ -199,3 +199,13 @@ def test_discover_missing_path_and_duplicates(repo: Path) -> None:
     result = discover([Path("missing"), Path("ops/app.cron"), Path("ops")])
     assert [e.message for e in result.errors] == ["path does not exist"]
     assert len(result.jobs) == 4
+
+
+def test_crontab_job_names() -> None:
+    long_args = "--with --many --arguments --that --go --on --and --on"
+    text = f"0 1 * * *\n0 2 * * * /very/long/path/to/tool {long_args}\n0 3 * * * /bin/true\n"
+    jobs = parse_crontab(text, "x.cron").jobs
+    assert jobs[0].name == "x.cron:1"
+    assert jobs[1].name == f"tool {long_args}"[:45] + "..."
+    assert len(jobs[1].name) == 48
+    assert jobs[2].name == "true"
