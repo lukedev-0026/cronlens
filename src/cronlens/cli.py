@@ -109,11 +109,13 @@ _CONFIG = click.option(
     "--config",
     "config_path",
     type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    envvar="CRONLENS_CONFIG",
     help="Settings file (default: nearest cronlens.toml or pyproject.toml).",
 )
 _DEFAULT_TZ = click.option(
     "--default-tz",
     metavar="ZONE",
+    envvar="CRONLENS_DEFAULT_TZ",
     help="Zone for crontabs and CronJobs that do not name one (default: UTC).",
 )
 _EXCLUDE = click.option(
@@ -135,6 +137,7 @@ _EXCLUDE = click.option(
 @click.option(
     "--fail-on",
     type=click.Choice(FAIL_ON_CHOICES),
+    envvar="CRONLENS_FAIL_ON",
     help="Lowest severity that makes the exit code 1 (default: warning).",
 )
 @click.option("--disable", multiple=True, metavar="RULE", help="Turn off a rule. Repeatable.")
