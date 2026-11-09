@@ -37,7 +37,7 @@ cronlens = "cronlens.cli:main"
 
 [dependency-groups]
 dev = [
-    "pytest==8.4.1",
+    "pytest==9.2.0",
     "pytest-cov==6.2.1",
     "ruff==0.12.7",
     "mypy==1.17.1",
