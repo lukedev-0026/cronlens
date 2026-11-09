@@ -1,0 +1,7 @@
+- id: cronlens
+  name: cronlens
+  description: Check cron schedules in crontabs, Kubernetes CronJobs and GitHub Actions workflows.
+  entry: cronlens scan
+  language: python
+  pass_filenames: false
+  always_run: true
