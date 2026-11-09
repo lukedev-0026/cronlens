@@ -29,5 +29,4 @@ Planned work is in [ROADMAP.md](ROADMAP.md) and released changes are in
 ## How it was built
 
 The code was written with the help of an AI coding assistant (Claude Code),
-under the direction and review of the maintainer. Commits made this way carry
-a `Co-Authored-By` trailer.
+under the direction and review of the maintainer.
