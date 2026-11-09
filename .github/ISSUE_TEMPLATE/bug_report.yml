@@ -1,0 +1,33 @@
+name: Bug report
+description: Something cronlens reports wrongly, misses, or crashes on.
+labels: [bug]
+body:
+  - type: textarea
+    id: input
+    attributes:
+      label: Input
+      description: The schedule or a minimal file that shows the problem. Remove anything private.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What cronlens did
+      description: Command run and its output.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: cronlens version
+      placeholder: output of `cronlens --version`
+    validations:
+      required: true

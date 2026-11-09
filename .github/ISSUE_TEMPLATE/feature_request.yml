@@ -1,0 +1,16 @@
+name: Feature request
+description: A new check, source, output format or option.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What mistake or question should cronlens help with?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What cronlens could do, with an example input and output if possible.
